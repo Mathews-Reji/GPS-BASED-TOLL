@@ -5,8 +5,12 @@ import pandas as pd
 from datetime import datetime, time
 from predictions import predict
 
-# Load the trained model to get feature names
-model = joblib.load("06_07_lgbm_model.sav")
+# Debug: Check model loading
+try:
+    model = joblib.load("06_07_lgbm_model.sav")
+    st.write("Model loaded successfully.")
+except Exception as e:
+    st.error(f"Error loading model: {e}")
 
 st.title('GPS BASED TOLL COLLECTION')
 st.markdown('A test model created for calculating the fees according to the distance travelled.')
@@ -79,9 +83,8 @@ if st.button("Calculate Fee"):
         # Convert input_data to DataFrame
         input_df = pd.DataFrame([input_data])
 
-        # Debug print statements to check the input data and predict function
+        # Debug: Print input DataFrame
         st.write("Input Data for Prediction (DataFrame):", input_df)
-        st.write("Using Predict Function:", predict)
 
         # Predict the fee using the external predict function
         result = predict(input_df)
