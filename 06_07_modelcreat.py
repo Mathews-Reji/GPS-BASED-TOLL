@@ -59,4 +59,4 @@ r2 = r2_score(y_test, predictions)
 print(f"Mean Squared Error: {mse}")
 print(f"R^2 Score: {r2}")
 
-#joblib.dump(model, "06_07_lgbm_model.sav")
+joblib.dump(model, "06_07_lgbm_model.sav")
