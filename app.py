@@ -10,7 +10,7 @@ st.write(f"Type of predict: {type(predict)}")
 
 # Debug: Check model loading
 try:
-    model = joblib.load("06_07_lgbm_model.sav")
+    test_model = joblib.load("06_07_lgbm_model.sav")
     st.write("Model loaded successfully.")
 except Exception as e:
     st.error(f"Error loading model: {e}")
@@ -96,7 +96,7 @@ if st.button("Calculate Fee"):
         st.write("Prediction input:", prediction_input)
 
         # Predict the fee using the external predict function
-        result = predict(prediction_input)
+        result = test_model.predict(prediction_input)
 
         # Display the result
         st.success(f"The calculated toll fee is: {result[0]:.2f}")
