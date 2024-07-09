@@ -3,9 +3,10 @@ import joblib
 import numpy as np
 import pandas as pd
 from datetime import datetime, time
+from predictions import predict
 
 # Load the trained model
-model = joblib.load("06_07_lgbm_model.sav")
+#model = joblib.load("06_07_lgbm_model.sav")
 
 st.title('GPS BASED TOLL COLLECTION')
 st.markdown('A test model created for calculating the fees according to the distance travelled.')
@@ -72,7 +73,8 @@ if st.button("Calculate Fee"):
             input_data[col] = 0
 
         # Predict the fee
-        result = model.predict(input_data)
+        result = predict(np.array([[start_hour,start_minute,end_minute,end_second,start_x,start_y,end_x,end_y,distance, average_speed]]))
+        st.text(result[0])
         
         # Display the result
         st.success(f"The calculated toll fee is: {result[0]:.2f}")
