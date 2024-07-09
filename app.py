@@ -68,22 +68,11 @@ if st.button("Calculate Fee"):
             'distance': distance,
             'average_speed': average_speed
         }
-        
-        vehicle_id_H 
-        vehicle_id_M 
-        vehicle_id_S 
-        vehicle_id_T
-        
-        # Encode vehicle_id and set zeros for other vehicle_id columns
-        vehicle_id_column = f"vehicle_id_{vehicle_id}"
-        encoded_columns = [col for col in model.feature_name_ if 'vehicle_id_' in col]
-        for col in encoded_columns:
-            input_data[col] = 1 if col == vehicle_id_column else 0
 
-        # Ensure all encoded columns are present in the input data
-        missing_cols = set(model.feature_name_) - set(input_data.keys())
-        for col in missing_cols:
-            input_data[col] = 0
+        # Initialize vehicle ID encoding
+        vehicle_ids = ['H', 'M', 'S', 'T']
+        for vid in vehicle_ids:
+            input_data[f'vehicle_id_{vid}'] = 1 if vehicle_id == vid else 0
 
         # Convert input_data to DataFrame
         input_df = pd.DataFrame([input_data])
@@ -92,10 +81,10 @@ if st.button("Calculate Fee"):
         st.write("Input Data for Prediction (DataFrame):", input_df)
 
         # Predict the fee using the external predict function
-        result = predict(np.array([[start_hour, start_minute, end_minute, end_second, start_x, start_y, end_x, end_y, distance, average_speed, vehicle_id_H, vehicle_id_M, vehicle_id_S, vehicle_id_T]]))
+        result = predict(input_df)
         
         # Display the result
-        st.success(f"The calculated toll fee is: {result:.2f}")
+        st.success(f"The calculated toll fee is: {result[0]:.2f}")
 
     except ValueError:
         st.error("Please enter valid input values.")
