@@ -76,6 +76,10 @@ if st.button("Calculate Fee"):
         for col in missing_cols:
             input_data[col] = 0
 
+        # Debug print statements to check the input data and predict function
+        st.write("Input Data for Prediction:", input_data)
+        st.write("Using Predict Function:", predict)
+
         # Predict the fee using the external predict function
         result = predict(input_data)
         
