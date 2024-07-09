@@ -2,8 +2,11 @@ import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
-from datetime import datetime, time
 from predictions import predict
+
+# Debug: Check if the predict function is imported correctly
+st.write(f"Predict function: {predict}")
+st.write(f"Type of predict: {type(predict)}")
 
 # Debug: Check model loading
 try:
@@ -86,9 +89,15 @@ if st.button("Calculate Fee"):
         vehicle_id_S = input_df['vehicle_id_S'].values[0]
         vehicle_id_T = input_df['vehicle_id_T'].values[0]
 
+        # Prepare data for prediction
+        prediction_input = np.array([[start_hour, start_minute, end_minute, end_second, start_x, start_y, end_x, end_y, distance, average_speed, vehicle_id_H, vehicle_id_M, vehicle_id_S, vehicle_id_T]])
+
+        # Debug: Print prediction input
+        st.write("Prediction input:", prediction_input)
+
         # Predict the fee using the external predict function
-        result = model.predict(np.array([[start_hour, start_minute, end_minute, end_second, start_x, start_y, end_x, end_y, distance, average_speed, vehicle_id_H, vehicle_id_M, vehicle_id_S, vehicle_id_T]]))
-        
+        result = predict(prediction_input)
+
         # Display the result
         st.success(f"The calculated toll fee is: {result[0]:.2f}")
 
@@ -96,3 +105,4 @@ if st.button("Calculate Fee"):
         st.error("Please enter valid input values.")
     except Exception as e:
         st.error(f"An error occurred: {e}")
+
