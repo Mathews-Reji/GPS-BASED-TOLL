@@ -80,6 +80,12 @@ if st.button("Calculate Fee"):
         # Debug: Print input DataFrame
         st.write("Input Data for Prediction (DataFrame):", input_df)
 
+        # Extract vehicle ID encoded columns
+        vehicle_id_H = input_df['vehicle_id_H'].values[0]
+        vehicle_id_M = input_df['vehicle_id_M'].values[0]
+        vehicle_id_S = input_df['vehicle_id_S'].values[0]
+        vehicle_id_T = input_df['vehicle_id_T'].values[0]
+
         # Predict the fee using the external predict function
         result = predict(np.array([[start_hour, start_minute, end_minute, end_second, start_x, start_y, end_x, end_y, distance, average_speed, vehicle_id_H, vehicle_id_M, vehicle_id_S, vehicle_id_T]]))
         
