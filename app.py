@@ -87,7 +87,7 @@ if st.button("Calculate Fee"):
         st.write("Input Data for Prediction (DataFrame):", input_df)
 
         # Predict the fee using the external predict function
-        result = predict(input_df)
+        result = predict(np.array([[start_hour, start_minute, end_minute, end_second, start_x, start_y, end_x, end_y, distance, average_speed, vehicle_id_H, vehicle_id_M, vehicle_id_S, vehicle_id_T]]))
         
         # Display the result
         st.success(f"The calculated toll fee is: {result:.2f}")
