@@ -68,7 +68,12 @@ if st.button("Calculate Fee"):
             'distance': distance,
             'average_speed': average_speed
         }
-
+        
+        vehicle_id_H 
+        vehicle_id_M 
+        vehicle_id_S 
+        vehicle_id_T
+        
         # Encode vehicle_id and set zeros for other vehicle_id columns
         vehicle_id_column = f"vehicle_id_{vehicle_id}"
         encoded_columns = [col for col in model.feature_name_ if 'vehicle_id_' in col]
