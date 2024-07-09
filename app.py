@@ -76,12 +76,15 @@ if st.button("Calculate Fee"):
         for col in missing_cols:
             input_data[col] = 0
 
+        # Convert input_data to DataFrame
+        input_df = pd.DataFrame([input_data])
+
         # Debug print statements to check the input data and predict function
-        st.write("Input Data for Prediction:", input_data)
+        st.write("Input Data for Prediction (DataFrame):", input_df)
         st.write("Using Predict Function:", predict)
 
         # Predict the fee using the external predict function
-        result = predict(input_data)
+        result = predict(input_df)
         
         # Display the result
         st.success(f"The calculated toll fee is: {result:.2f}")
