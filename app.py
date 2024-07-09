@@ -3,9 +3,7 @@ import joblib
 import numpy as np
 import pandas as pd
 from datetime import datetime, time
-
-# Load the trained model
-model = joblib.load("06_07_lgbm_model.sav")
+from predictions import predict
 
 # Function to encode vehicle_id
 def encode_vehicle_id(vehicle_id, model):
@@ -13,13 +11,6 @@ def encode_vehicle_id(vehicle_id, model):
     vehicle_id_column = f"vehicle_id_{vehicle_id}"
     encoding = {col: 1 if col == vehicle_id_column else 0 for col in encoded_columns}
     return encoding
-
-# Function to make prediction
-def predict(input_data, model):
-    input_df = pd.DataFrame([input_data])
-    # Predict the fee
-    result = model.predict(input_df)
-    return result[0]
 
 st.title('GPS BASED TOLL COLLECTION')
 st.markdown('A test model created for calculating the fees according to the distance travelled.')
@@ -88,7 +79,7 @@ if st.button("Calculate Fee"):
             input_data[col] = 0
 
         # Predict the fee
-        result = predict(input_data, model)
+        result = predict(np.array([['start_hour', 'start_minute', 'end_minute', 'end_second', 'start_x', 'start_y', 'end_x', 'end_y', 'distance', 'average_speed', 'vehicle_id_H', 'vehicle_id_M', 'vehicle_id_S', 'vehicle_id_T']]))
         
         # Display the result
         st.success(f"The calculated toll fee is: {result:.2f}")
