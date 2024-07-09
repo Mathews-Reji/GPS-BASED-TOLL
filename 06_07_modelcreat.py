@@ -6,7 +6,7 @@ import time
 import joblib
 
 # Load your dataset
-df = pd.read_csv(r'C:\Users\mathe\Documents\Intel Industrial Training\App Deployment\06_07_latlong.csv')
+df = pd.read_csv("06_07_latlong.csv")
 
 # Convert start_time and end_time to datetime objects
 df['start_time'] = pd.to_datetime(df['start_time'], format='%d-%m-%Y %H:%M', errors='coerce')
