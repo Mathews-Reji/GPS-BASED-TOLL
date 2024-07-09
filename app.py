@@ -44,10 +44,10 @@ st.text('')
 if st.button("Calculate Fee"):
     try:
         # Convert inputs to appropriate types
-        #start_x = float(start_x)
-        #start_y = float(start_y)
-        #end_x = float(end_x)
-        #end_y = float(end_y)
+        start_x = float(start_x)
+        start_y = float(start_y)
+        end_x = float(end_x)
+        end_y = float(end_y)
         start_hour=int(start_hour)
         start_minute=int(start_minute)
         end_minute=int(end_minute)
@@ -57,8 +57,8 @@ if st.button("Calculate Fee"):
         average_speed = float(average_speed)
 
         # Prepare the input data for prediction
-        input_data = pd.DataFrame([[start_hour,start_minute,end_minute,end_second, distance, average_speed]], 
-                                  columns=['start_hour','start_minute','end_minute','end_second','distance', 'average_speed'])
+        input_data = pd.DataFrame([[start_hour,start_minute,end_minute,end_second,start_x,start_y,end_x,end_y,distance, average_speed]], 
+                                  columns=['start_hour', 'start_minute','end_minute','end_second','start_x','start_y','end_x','end_y','distance','average_speed'])
         
         # Encode vehicle_id
         vehicle_id_column = f"vehicle_id_{vehicle_id}"
