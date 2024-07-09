@@ -2,11 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
-from predictions import predict
 
-# Debug: Check if the predict function is imported correctly
-st.write(f"Predict function: {predict}")
-st.write(f"Type of predict: {type(predict)}")
 
 # Debug: Check model loading
 try:
