@@ -90,6 +90,9 @@ if st.button("Calculate Fee"):
 
             # Display the result
             st.success(f"The calculated toll fee is: {result[0]:.2f}")
+        
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
 
     else:
         st.error("Model not loaded. Please check your model file.")
