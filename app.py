@@ -2,6 +2,7 @@ import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
+from lightgbm.sklearn import LGBMRegressor
 
 # Load the model once when the app starts
 model = None
@@ -90,7 +91,7 @@ if st.button("Calculate Fee"):
         if model is not None:
             try:
                 # Ensure the predict method exists and is callable
-                if callable(model.predict):
+                if callable(getattr(model, "predict", None)):
                     # Predict the fee using the loaded model
                     result = model.predict(prediction_input)
                     st.write(f"Model prediction output: {result}")
