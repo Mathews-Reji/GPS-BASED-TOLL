@@ -82,14 +82,7 @@ if st.button("Calculate Fee"):
         st.write("Input Data for Prediction (DataFrame):", input_df)
 
         # Prepare data for prediction
-        prediction_input = np.array([[
-            start_hour, start_minute, end_minute, end_second, start_x, start_y, 
-            end_x, end_y, distance, average_speed, 
-            input_df['vehicle_id_H'].values[0], 
-            input_df['vehicle_id_M'].values[0], 
-            input_df['vehicle_id_S'].values[0], 
-            input_df['vehicle_id_T'].values[0]
-        ]])
+        prediction_input = input_df.values
 
         # Debug: Print prediction input
         st.write("Prediction input:", prediction_input)
