@@ -7,6 +7,8 @@ import pandas as pd
 try:
     model = joblib.load("06_07_lgbm_model.sav")
     st.write("Model loaded successfully.")
+    st.write(f"Model type: {type(model)}")
+    st.write(f"Model has predict method: {'predict' in dir(model)}")
 except Exception as e:
     model = None
     st.write(f"Error loading model: {e}")
