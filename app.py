@@ -82,7 +82,7 @@ if st.button("Calculate Fee"):
         st.write("Input Data for Prediction (DataFrame):", input_df)
 
         # Prepare data for prediction
-        prediction_input = input_df.values
+        prediction_input = np.array(input_df.values)
 
         # Debug: Print prediction input
         st.write("Prediction input:", prediction_input)
