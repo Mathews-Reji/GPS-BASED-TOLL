@@ -2,15 +2,8 @@ import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
+from predictions import predict
 
-test_model= None
-# Debug: Check model loading
-try:
-    test_model = joblib.load("06_07_lgbm_model.sav")
-    st.write("Model loaded successfully.")
-except Exception as e:
-    st.error(f"Error loading model: {e}")
-    test_model = None  # Set test_model to None if loading fails
 
 st.title('GPS BASED TOLL COLLECTION')
 st.markdown('A test model created for calculating the fees according to the distance travelled.')
@@ -43,7 +36,6 @@ with col3:
 st.text('')
 if st.button("Calculate Fee"):
     try:
-        if test_model is not None:
             # Convert inputs to appropriate types
             start_x = float(start_x)
             start_y = float(start_y)
@@ -94,13 +86,13 @@ if st.button("Calculate Fee"):
             st.write("Prediction input:", prediction_input)
 
             # Predict the fee using the external predict function
-            result = test_model.predict(prediction_input)
+            result = predict(prediction_input)
 
             # Display the result
             st.success(f"The calculated toll fee is: {result[0]:.2f}")
 
-        else:
-            st.error("Model not loaded. Please check your model file.")
+    else:
+        st.error("Model not loaded. Please check your model file.")
 
     except ValueError:
         st.error("Please enter valid input values.")
