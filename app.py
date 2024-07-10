@@ -89,11 +89,15 @@ if st.button("Calculate Fee"):
 
         if model is not None:
             try:
-                # Predict the fee using the loaded model
-                result = model.predict(prediction_input)
-                st.write(f"Model prediction output: {result}")
-                # Display the result
-                st.success(f"The calculated toll fee is: {result[0]:.2f}")
+                # Ensure the predict method exists and is callable
+                if callable(model.predict):
+                    # Predict the fee using the loaded model
+                    result = model.predict(prediction_input)
+                    st.write(f"Model prediction output: {result}")
+                    # Display the result
+                    st.success(f"The calculated toll fee is: {result[0]:.2f}")
+                else:
+                    st.error("The predict method is not callable.")
             except Exception as e:
                 st.error(f"Error during model prediction: {e}")
         else:
