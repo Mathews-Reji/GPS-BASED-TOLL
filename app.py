@@ -95,6 +95,7 @@ if st.button("Calculate Fee"):
         if model is not None:
             # Predict the fee using the loaded model
             result = model.predict(prediction_input)
+            st.write(f"Model prediction output: {result}")
             # Display the result
             st.success(f"The calculated toll fee is: {result[0]:.2f}")
         else:
