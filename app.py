@@ -1,10 +1,15 @@
 import streamlit as st
+import joblib
 import numpy as np
 import pandas as pd
-from predictions import predict
 
-# Debug: Print statement to verify the predict function is imported
-st.write("Debug: Checking predict function:", predict)
+# Load the model once when the app starts
+try:
+    model = joblib.load("06_07_lgbm_model.sav")
+    st.write("Model loaded successfully.")
+except Exception as e:
+    model = None
+    st.write(f"Error loading model: {e}")
 
 st.title('GPS BASED TOLL COLLECTION')
 st.markdown('A test model created for calculating the fees according to the distance travelled.')
@@ -87,14 +92,13 @@ if st.button("Calculate Fee"):
         # Debug: Print prediction input
         st.write("Prediction input:", prediction_input)
 
-        # Check if predict is callable
-        if callable(predict):
-            # Predict the fee using the external predict function
-            result = predict(prediction_input)
+        if model is not None:
+            # Predict the fee using the loaded model
+            result = model.predict(prediction_input)
             # Display the result
             st.success(f"The calculated toll fee is: {result[0]:.2f}")
         else:
-            st.error("Predict function is not callable. Please check the predict function definition.")
+            st.error("Model not loaded. Please check your model file.")
         
     except ValueError:
         st.error("Please enter valid input values.")
