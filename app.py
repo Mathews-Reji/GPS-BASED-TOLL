@@ -93,15 +93,18 @@ if st.button("Calculate Fee"):
         st.write("Prediction input:", prediction_input)
 
         if model is not None:
-            # Predict the fee using the loaded model
-            result = model.predict(prediction_input)
-            st.write(f"Model prediction output: {result}")
-            # Display the result
-            st.success(f"The calculated toll fee is: {result[0]:.2f}")
+            try:
+                # Predict the fee using the loaded model
+                result = model.predict(prediction_input)
+                st.write(f"Model prediction output: {result}")
+                # Display the result
+                st.success(f"The calculated toll fee is: {result[0]:.2f}")
+            except Exception as e:
+                st.error(f"Error during model prediction: {e}")
         else:
             st.error("Model not loaded. Please check your model file.")
         
-    except ValueError:
-        st.error("Please enter valid input values.")
+    except ValueError as ve:
+        st.error(f"ValueError: Please enter valid input values. {ve}")
     except Exception as e:
         st.error(f"An error occurred: {e}")
