@@ -7,7 +7,7 @@ from lightgbm.sklearn import LGBMRegressor
 # Load the model once when the app starts
 model = None
 try:
-    model = joblib.load("06_07_lgbm_model.sav")
+    model = joblib.load("lgbm_model.sav")
     st.write("Model loaded successfully.")
     st.write(f"Model type: {type(model)}")
     st.write(f"Model has predict method: {'predict' in dir(model)}")
